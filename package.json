@@ -1,0 +1,25 @@
+{
+  "name": "@babel/jsx2xset",
+  "version": "1.0.0",
+  "description": "Convert JSX to XEON XSET Object.",
+  "main": "/XSET/index.js",
+  "scripts": {
+    "start": "nodemon --ignore ./test/result.js ./main.js"
+  },
+  "keywords": [
+    "jsx",
+    "babel",
+    "xeon",
+    "xset"
+  ],
+  "author": "Code_With_Arif",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.16.5",
+    "@babel/preset-env": "^7.16.5"
+  },
+  "dependencies": {
+    "babel-plugin-syntax-jsx": "^6.18.0",
+    "nodemon": "^2.0.15"
+  }
+}
