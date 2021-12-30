@@ -1,5 +1,8 @@
 /**
- * 
+ * Copyright (c) 2021-present, ChatCord, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 "user_strict";
@@ -11,7 +14,7 @@
  * @returns - The code to convert with.
  */
 module.exports = function ({ types: t }) {
-      
+
       /**
        * @description - A function to check Uppercase words.
        * 
