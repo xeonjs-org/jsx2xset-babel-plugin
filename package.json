@@ -2,7 +2,7 @@
   "name": "@xeonjs/jsx2xset",
   "version": "1.0.2",
   "description": "Convert JSX to XEON XSET Object.",
-  "main": "/XSET/index.js",
+  "main": "./XSET/index.js",
   "scripts": {
     "start": "nodemon --ignore ./test/result.js ./main.js"
   },
