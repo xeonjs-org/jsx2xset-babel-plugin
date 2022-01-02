@@ -1,31 +1,52 @@
-export default function main(context) {
-  var a = a !== null && a !== void 0 ? a : b;
+import XEON from '../xeon/xeon.demo.js';
+
+var App = function App(props) {
   return {
     "name": "div",
     "props": {
-      "attributes": {
-        "className": "container",
-        "id": "first-div",
-        "style": style.container
-      },
-      "children": [" ", {
-        "name": "h1",
-        "props": {
-          "attributes": {
-            "style": {
-              color: "#fff",
-              backgroundColor: "#000"
-            }
-          },
-          "children": ["Hello World"]
-        }
-      }, " ", {
-        "name": "h1",
-        "props": {
-          "attributes": {},
-          "children": ["My name is Arif Sardar ", a]
-        }
-      }, " "]
+      "attributes": {},
+      "children": ["\n                  hello div\n            "]
     }
   };
-}
+};
+
+console.log({
+  "name": App,
+  "props": {
+    "attributes": {},
+    "children": []
+  }
+});
+XEON.config({
+  "name": "div",
+  "props": {
+    "attributes": {
+      "className": "Hello"
+    },
+    "children": ["\n            ", {
+      "name": "h1",
+      "props": {
+        "attributes": {},
+        "children": ["Hello World"]
+      }
+    }, "\n            ", {
+      "name": "hr",
+      "props": {
+        "attributes": {},
+        "children": []
+      }
+    }, "\n            ", {
+      "name": "p",
+      "props": {
+        "attributes": {},
+        "children": ["This is a paragraph."]
+      }
+    }, "\n            ", {
+      "name": App,
+      "props": {
+        "attributes": {},
+        "children": []
+      }
+    }, "\n      "]
+  }
+}, document.getElementById("root"));

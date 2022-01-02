@@ -25,7 +25,7 @@ module.exports = function ({ types: t }) {
             return Word === Word.toUpperCase();
       }
 
-      const isExtension = (openingElement, path) => path.scope.hasBinding(openingElement.name.name);
+      // const isExtension = (openingElement, path) => (path.scope.hasOwnBinding(openingElement.name.name) || path.scope.hasBinding(openingElement.name.name));
 
       /**
        * @description - A function to generate Fragment from the JSX.
@@ -71,15 +71,14 @@ module.exports = function ({ types: t }) {
 
             const OPENING_ELEMENT = NODE.openingElement,
                   CHILDREN = path.get('children'),
-                  ELEMENT_ATTRIBUTES = OPENING_ELEMENT.attributes,
-                  EXTENDS = isExtension(OPENING_ELEMENT, path);
+                  ELEMENT_ATTRIBUTES = OPENING_ELEMENT.attributes;
 
             let type = isUpperCase(OPENING_ELEMENT.name.name[0]) ? t.identifier(OPENING_ELEMENT.name.name) : t.StringLiteral(OPENING_ELEMENT.name.name),
                   attributes = ELEMENT_ATTRIBUTES.length ? buildAttributeObject(ELEMENT_ATTRIBUTES, FILE) : t.ObjectExpression([]),
                   children = CHILDREN.length ? t.ArrayExpression(CHILDREN.map(child => generateXSET(child, state))) : t.arrayExpression([]);
 
             return t.ObjectExpression([
-                  t.ObjectProperty(t.StringLiteral(OPTIONS.name), EXTENDS ? t.NullLiteral() : type),
+                  t.ObjectProperty(t.StringLiteral(OPTIONS.name), type),
                   t.ObjectProperty(t.StringLiteral(OPTIONS.props), t.ObjectExpression([
                         t.ObjectProperty(t.StringLiteral(OPTIONS.attributes), attributes),
                         t.ObjectProperty(t.StringLiteral(OPTIONS.children), children)
