@@ -1,6 +1,6 @@
 // import XEON from '../xeon/xeon.demo.js';
 import XEON from "./helper.js";
-XEON.create_css_from_utf_8("* {\r\n      margin: 0;\r\n      padding: 0;\r\n}\r\n\r\n.container {\r\n      width: 100%;\r\n      height: 100%;\r\n}");
+var Style = XEON.create_css_from_utf_8("* {\r\n      margin: 0;\r\n      padding: 0;\r\n}\r\n\r\n.container {\r\n      width: 100%;\r\n      height: 100%;\r\n}");
 
 var App = function App(props) {
   return {

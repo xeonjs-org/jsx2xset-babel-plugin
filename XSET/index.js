@@ -176,7 +176,9 @@ module.exports = function ({ types: t }) {
             if (sourcePathArray[sourcePathArray.length - 1] === "css") {
                   const cssPath = pathModule.join(state.file.opts.filename, "../", source.value);
                   const css = fs.readFileSync(cssPath, 'utf8');
-                  return t.callExpression(t.identifier("XEON.create_css_from_utf_8"), [t.StringLiteral(css)]);
+                  return t.variableDeclaration("const", [
+                        t.variableDeclarator(t.identifier(specifier[0]?.local?.name), t.callExpression(t.identifier("XEON.create_css_from_utf_8"), [t.StringLiteral(css)]))
+                  ]);
             }
 
             /**
@@ -186,7 +188,6 @@ module.exports = function ({ types: t }) {
 
             js_extensions.forEach(extension => {
                   if (extension !== sourcePathArray[sourcePathArray.length - 1]) {
-                        console.log(pathModule.join(state.file.opts.filename, "../", source.value + "." + extension));
                         let is_file_exists = fs.existsSync(pathModule.join(state.file.opts.filename, "../", source.value + "." + extension));
                         if (is_file_exists) {
                               path = t.importDeclaration(specifier, t.StringLiteral(source.value + "." + extension));
