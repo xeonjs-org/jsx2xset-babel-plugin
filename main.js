@@ -28,10 +28,11 @@ const config = {
 };
 
 let code = fs.readFileSync("./test/main.jsx", "utf8");
+code = "const _script_path = \"./test/main.jsx\";" + code;
 // Remove all whitespaces, tabs, newlines, etc.
 // code = code.trim().replace(/(\r\n|\n|\r|\t)/gm, "").replace(/\s+/gm, " ").trim();
 
-babel.transform(code, config, function (err, result) {
+babel.transformFile("./test/main.jsx", config, function (err, result) {
 
 
       if (err) {

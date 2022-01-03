@@ -1,4 +1,6 @@
-import XEON from '../xeon/xeon.demo.js';
+// import XEON from '../xeon/xeon.demo.js';
+import XEON from './helper';
+import Style from './App.css';
 
 const App = (props) => {
 
