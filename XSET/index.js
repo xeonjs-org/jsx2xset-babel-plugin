@@ -167,7 +167,9 @@ module.exports = function ({ types: t }) {
             if (sourcePathArray[sourcePathArray.length - 1] === "css" && sourcePathArray[sourcePathArray.length - 2] === "module") {
                   const cssPath = pathModule.join(state.file.opts.filename, "../", source.value);
                   const css = fs.readFileSync(cssPath, 'utf8');
-                  return t.callExpression(t.identifier("XEON.create_module_css_from_utf_8"), [t.StringLiteral(css)]);
+                  return t.variableDeclaration("const", [
+                        t.variableDeclarator(t.identifier(specifier[0]?.local?.name), t.callExpression(t.identifier("XEON.create_module_css_from_utf_8"), [t.StringLiteral(sourcePathArray[0]), t.StringLiteral(css)]))
+                  ]);
             }
 
             /**
@@ -176,9 +178,7 @@ module.exports = function ({ types: t }) {
             if (sourcePathArray[sourcePathArray.length - 1] === "css") {
                   const cssPath = pathModule.join(state.file.opts.filename, "../", source.value);
                   const css = fs.readFileSync(cssPath, 'utf8');
-                  return t.variableDeclaration("const", [
-                        t.variableDeclarator(t.identifier(specifier[0]?.local?.name), t.callExpression(t.identifier("XEON.create_css_from_utf_8"), [t.StringLiteral(css)]))
-                  ]);
+                  return t.callExpression(t.identifier("XEON.create_css_from_utf_8"), [t.StringLiteral(sourcePathArray[0]), t.StringLiteral(css)]);
             }
 
             /**
