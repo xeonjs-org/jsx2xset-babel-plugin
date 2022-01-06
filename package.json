@@ -1,6 +1,6 @@
 {
   "name": "@xeonjs/jsx2xset",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Convert JSX to XEON XSET Object.",
   "main": "./XSET/index.js",
   "scripts": {
