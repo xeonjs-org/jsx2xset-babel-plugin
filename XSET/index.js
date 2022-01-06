@@ -161,7 +161,7 @@ module.exports = function ({ types: t }) {
             const source = NODE.source;
             const specifier = NODE.specifiers;
 
-            const sourcePathArray = source.value.split(".");
+            const sourcePathArray = source.value.split("/").pop().split(".");
 
             /**
              * module css script
