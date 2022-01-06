@@ -47,11 +47,13 @@ module.exports = function ({ types: t }) {
 
             const CHILDREN = path.get('children');
 
-            let children = CHILDREN.length ? t.ArrayExpression(CHILDREN.map(child => generateXSET(child, state))) : t.arrayExpression([]);
+            let attributes = t.ObjectExpression([]),
+                  children = CHILDREN.length ? t.ArrayExpression(CHILDREN.map(child => generateXSET(child, state))) : t.arrayExpression([]);
 
             return t.ObjectExpression([
-                  t.ObjectProperty(t.StringLiteral(OPTIONS.name), t.StringLiteral("xeon.Fragment")),
+                  t.ObjectProperty(t.StringLiteral(OPTIONS.name), t.StringLiteral("div")),
                   t.ObjectProperty(t.StringLiteral(OPTIONS.props), t.ObjectExpression([
+                        t.ObjectProperty(t.StringLiteral(OPTIONS.attributes), attributes),
                         t.ObjectProperty(t.StringLiteral(OPTIONS.children), children)
                   ])),
             ]);
