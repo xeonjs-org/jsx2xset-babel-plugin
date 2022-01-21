@@ -149,60 +149,6 @@ module.exports = function ({ types: t }) {
       };
 
 
-      /**
-       * 
-       * @param {Object} path 
-       * @param {Object} state 
-       * @returns 
-       */
-      function generateImportStatement(path, state) {
-            const NODE = path.node;
-
-            const source = NODE.source;
-            const specifier = NODE.specifiers;
-
-            const sourcePathArray = source.value.split("/").pop().split(".");
-
-            /**
-             * module css script
-             */
-            if (sourcePathArray[sourcePathArray.length - 1] === "css" && sourcePathArray[sourcePathArray.length - 2] === "module") {
-                  const cssPath = pathModule.join(state.file.opts.filename, "../", source.value);
-                  const css = fs.readFileSync(cssPath, 'utf8');
-                  return t.variableDeclaration("const", [
-                        t.variableDeclarator(t.identifier(specifier[0]?.local?.name), t.callExpression(t.identifier("XEON.create_module_css_from_utf_8"), [t.StringLiteral(sourcePathArray[0]), t.StringLiteral(css)]))
-                  ]);
-            }
-
-            /**
-             * css script
-             */
-            if (sourcePathArray[sourcePathArray.length - 1] === "css") {
-                  const cssPath = pathModule.join(state.file.opts.filename, "../", source.value);
-                  const css = fs.readFileSync(cssPath, 'utf8');
-                  return t.callExpression(t.identifier("XEON.create_css_from_utf_8"), [t.StringLiteral(css)]);
-            }
-
-            /**
-             * javascript extensions
-             */
-            const js_extensions = ["js", "jsx", "mjs", "cjs", "xjs"];
-
-            js_extensions.forEach(extension => {
-                  if (extension !== sourcePathArray[sourcePathArray.length - 1]) {
-                        let is_file_exists = fs.existsSync(pathModule.join(state.file.opts.filename, "../", source.value + "." + extension));
-                        if (is_file_exists) {
-                              path = t.importDeclaration(specifier, t.StringLiteral(source.value + "." + extension));
-                        }
-                  }
-            });
-
-            return path;
-      }
-
-
-
-
       return {
             inherits: require('babel-plugin-syntax-jsx'),
             visitor: {
@@ -211,9 +157,6 @@ module.exports = function ({ types: t }) {
                   },
                   JSXElement: function (path, state) {
                         path.replaceWith(generateXSET(path, state));
-                  },
-                  ImportDeclaration: function (path, state) {
-                        path.replaceWith(generateImportStatement(path, state));
                   }
             }
       };
